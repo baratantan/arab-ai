@@ -2,130 +2,176 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arab AI - منصة الذكاء الاصطناعي العربية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arab AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- الشريط الجانبي -->
-    <aside class="sidebar">
+    <!-- القائمة الجانبية -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <button class="new-chat-btn" onclick="newChat()">
-                <span>+</span> محادثة جديدة
+            <button class="icon-btn-circle" onclick="toggleSidebar()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+            <h2 class="sidebar-title">Arab AI</h2>
+            <button class="icon-btn-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                </svg>
             </button>
         </div>
-        <div class="sidebar-section">
-            <div class="section-title">اليوم</div>
-            <div class="chat-list" id="chat-list">
-                <div class="chat-item active">
-                    <span>💬 محادثة جديدة</span>
-                </div>
+
+        <div class="sidebar-menu">
+            <div class="menu-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+                </svg>
+                <span>الصور</span>
+            </div>
+            <div class="menu-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                <span>المكتبة</span>
+            </div>
+            <div class="menu-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span>المشروعات</span>
+            </div>
+            <div class="menu-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                </svg>
+                <span>التحكم عن بُعد</span>
+            </div>
+            <div class="menu-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                </svg>
+                <span>المهام المجدولة</span>
+            </div>
+            <div class="menu-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                <span>المكونات الإضافية</span>
             </div>
         </div>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="chat-history" id="chat-history">
+            <div class="history-item active">
+                <span>دردشة جديدة</span>
+            </div>
+        </div>
+
         <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="user-avatar">👤</div>
+            <div class="new-chat-btn" onclick="newChat()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+                <span>الدردشة</span>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">م</div>
                 <span>مستخدم</span>
             </div>
         </div>
     </aside>
 
     <!-- المحتوى الرئيسي -->
-    <main class="main-content">
-        <!-- شريط علوي -->
-        <header class="top-bar">
-            <div class="model-selector">
-                <select id="model-select">
-                    <option value="meta/llama-3.1-70b-instruct">🧠 Llama 3.1 70B</option>
-                    <option value="meta/codellama-70b-instruct">💻 CodeLlama 70B</option>
-                    <option value="nvidia/nemotron-4-340b-instruct">⚡ Nemotron 340B</option>
-                    <option value="deepseek-ai/deepseek-coder-6.7b-base">🎯 DeepSeek Coder</option>
-                </select>
-            </div>
-            <div class="top-actions">
-                <button class="icon-btn" title="مشاركة">🔗</button>
-                <button class="icon-btn" title="إعدادات">⚙️</button>
-            </div>
+    <main class="main">
+        <!-- الشريط العلوي -->
+        <header class="topbar">
+            <button class="icon-btn-circle" onclick="toggleSidebar()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+            </button>
+            <button class="upgrade-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/>
+                </svg>
+                <span>اشترك في Plus</span>
+            </button>
+            <button class="icon-btn-circle" onclick="toggleSidebar()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
         </header>
 
         <!-- منطقة المحادثة -->
-        <div class="chat-area" id="chat-area">
+        <div class="chat-container" id="chat-container">
             <!-- شاشة الترحيب -->
             <div class="welcome-screen" id="welcome-screen">
-                <div class="welcome-logo">
-                    <div class="logo-circle">🤖</div>
-                    <h1>Arab AI</h1>
-                    <p>مساعدك الذكي للبرمجة - مدعوم بتقنية NVIDIA</p>
-                </div>
-                
-                <div class="suggestions-grid">
-                    <button class="suggestion-card" onclick="useSuggestion('اشرح لي مفهوم الـ Object Oriented Programming في Python مع أمثلة')">
-                        <div class="suggestion-icon">🐍</div>
-                        <div class="suggestion-text">
-                            <strong>شرح OOP في Python</strong>
-                            <span>مفاهيم البرمجة الكائنية</span>
-                        </div>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="document.getElementById('user-input').focus()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+                        </svg>
+                        <span>إنشاء صورة أو ملصق</span>
                     </button>
-                    
-                    <button class="suggestion-card" onclick="useSuggestion('اكتب دالة JavaScript للتحقق من صحة البريد الإلكتروني')">
-                        <div class="suggestion-icon">📧</div>
-                        <div class="suggestion-text">
-                            <strong>التحقق من البريد الإلكتروني</strong>
-                            <span>كود JavaScript جاهز</span>
-                        </div>
-                    </button>
-                    
-                    <button class="suggestion-card" onclick="useSuggestion('ما الفرق بين REST API و GraphQL؟')">
-                        <div class="suggestion-icon">🌐</div>
-                        <div class="suggestion-text">
-                            <strong>REST vs GraphQL</strong>
-                            <span>مقارنة تقنية شاملة</span>
-                        </div>
-                    </button>
-                    
-                    <button class="suggestion-card" onclick="useSuggestion('ساعدني في بناء تطبيق React من الصفر')">
-                        <div class="suggestion-icon">⚛️</div>
-                        <div class="suggestion-text">
-                            <strong>بناء تطبيق React</strong>
-                            <span>خطوة بخطوة</span>
-                        </div>
+                    <button class="action-btn" onclick="document.getElementById('user-input').focus()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                        </svg>
+                        <span>الكتابة أو التحرير</span>
                     </button>
                 </div>
             </div>
 
-            <!-- رسائل المحادثة -->
-            <div class="messages-container" id="messages-container"></div>
+            <!-- الرسائل -->
+            <div class="messages" id="messages"></div>
         </div>
 
         <!-- منطقة الإدخال -->
-        <div class="input-area">
-            <div class="input-container">
-                <div class="input-wrapper">
-                    <textarea 
-                        id="user-input" 
-                        placeholder="اسأل Arab AI عن أي شيء في البرمجة..."
-                        rows="1"
-                        oninput="autoResize(this)"
-                        onkeydown="handleKey(event)"
-                    ></textarea>
-                    <button class="send-btn" id="send-btn" onclick="sendMessage()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="input-footer">
-                    <span>Arab AI يمكن أن يخطئ. تحقق من المعلومات المهمة.</span>
-                </div>
+        <div class="input-section">
+            <div class="input-bar">
+                <button class="input-icon-btn" onclick="document.getElementById('file-input').click()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                </button>
+                <textarea 
+                    id="user-input" 
+                    placeholder="اسأل Arab AI"
+                    rows="1"
+                    oninput="autoResize(this)"
+                    onkeydown="handleKey(event)"
+                ></textarea>
+                <button class="input-icon-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                        <line x1="8" y1="23" x2="16" y2="23"/>
+                    </svg>
+                </button>
+                <button class="send-btn" id="send-btn" onclick="sendMessage()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 19V5M5 12l7-7 7 7"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="input-disclaimer">
+                يمكن لـ Arab AI أن يخطئ. تحقق من المعلومات المهمة.
             </div>
         </div>
     </main>
 
+    <input type="file" id="file-input" style="display:none">
     <script src="script.js"></script>
 </body>
 </html>
